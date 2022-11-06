@@ -1,14 +1,18 @@
+import { useDispatch } from 'react-redux';
+import { addContact } from '../../redux/store';
 import { useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import { StyledForm, FormLabel, FormInput, SubmitButton } from './Form.styled';
 
-export const Form = ({ onSubmit }) => {
+export const Form = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
   const nameInputId = nanoid();
   const numberInputId = nanoid();
+
+  const dispatch = useDispatch();
 
   const resetForm = () => {
     setName('');
@@ -17,7 +21,7 @@ export const Form = ({ onSubmit }) => {
 
   const onFormSubmitHandle = e => {
     e.preventDefault();
-    onSubmit({ name, number });
+    dispatch(addContact({ id: nanoid(), name, number }));
     resetForm();
   };
 
@@ -70,6 +74,6 @@ export const Form = ({ onSubmit }) => {
 
 export default Form;
 
-Form.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
+// Form.propTypes = {
+//   onSubmit: PropTypes.func.isRequired,
+// };

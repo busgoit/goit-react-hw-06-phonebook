@@ -1,10 +1,19 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { setFilter } from '../../redux/store';
 import { nanoid } from 'nanoid';
 import { StyledFilter, FilterLabel, FilterInput } from './Filter.styled';
 
 const filterId = nanoid();
 
-const Filter = ({ value, onChange }) => {
+const Filter = () => {
+  const filter = useSelector(state => state.filter);
+  const dispatch = useDispatch();
+
+  const onFilterChange = e => {
+    dispatch(setFilter(e.currentTarget.value));
+  };
+
   return (
     <StyledFilter>
       <FilterLabel htmlFor={filterId}>Find contacts by name</FilterLabel>
@@ -12,8 +21,8 @@ const Filter = ({ value, onChange }) => {
         type="text"
         name="filter"
         id={filterId}
-        value={value}
-        onChange={onChange}
+        value={filter}
+        onChange={onFilterChange}
         placeholder="Enter name"
         required
       />
@@ -23,7 +32,7 @@ const Filter = ({ value, onChange }) => {
 
 export default Filter;
 
-Filter.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-};
+// Filter.propTypes = {
+//   value: PropTypes.string.isRequired,
+//   onChange: PropTypes.func.isRequired,
+// };

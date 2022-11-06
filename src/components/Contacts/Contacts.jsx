@@ -1,4 +1,6 @@
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteContact } from '../../redux/store';
+// import PropTypes from 'prop-types';
 import { TiDeleteOutline } from 'react-icons/ti';
 import {
   ContactsList,
@@ -9,16 +11,34 @@ import {
   Info,
 } from './Contacts.styled';
 
-const Contacts = ({ contacts, onDelete }) => {
+const Contacts = () => {
+  const contacts = useSelector(state => state.contacts);
+  const filter = useSelector(state => state.filter);
+  const dispatch = useDispatch();
+
+  const getFilteredContacts = () => {
+    const normalisedFilter = filter.toLowerCase().trim();
+
+    return [...contacts].filter(contact =>
+      contact.name.toLowerCase().includes(normalisedFilter)
+    );
+  };
+
+  const filteredContacts = getFilteredContacts();
+
+  const onBtnClick = id => {
+    dispatch(deleteContact(id));
+  };
+
   return (
     <>
-      {contacts.length !== 0 ? (
+      {filteredContacts.length !== 0 ? (
         <ContactsList>
-          {contacts.map(({ id, name, number }) => (
+          {filteredContacts.map(({ id, name, number }) => (
             <Contact key={id}>
               <Name>{name}: </Name>
               <Number>{number}</Number>
-              <Button type="button" onClick={() => onDelete(id)}>
+              <Button type="button" onClick={() => onBtnClick(id)}>
                 <TiDeleteOutline />
               </Button>
             </Contact>
@@ -33,13 +53,13 @@ const Contacts = ({ contacts, onDelete }) => {
 
 export default Contacts;
 
-Contacts.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
-  onDelete: PropTypes.func.isRequired,
-};
+// Contacts.propTypes = {
+//   contacts: PropTypes.arrayOf(
+//     PropTypes.exact({
+//       id: PropTypes.string.isRequired,
+//       name: PropTypes.string.isRequired,
+//       number: PropTypes.string.isRequired,
+//     })
+//   ),
+//   onDelete: PropTypes.func.isRequired,
+// };
