@@ -1,4 +1,3 @@
-// import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { setFilter } from '../../redux/store';
 import { nanoid } from 'nanoid';
@@ -10,9 +9,7 @@ const Filter = () => {
   const filter = useSelector(state => state.filter);
   const dispatch = useDispatch();
 
-  const onFilterChange = e => {
-    dispatch(setFilter(e.currentTarget.value));
-  };
+  const onFilterChange = e => dispatch(setFilter(e.currentTarget.value));
 
   return (
     <StyledFilter>
@@ -31,8 +28,3 @@ const Filter = () => {
 };
 
 export default Filter;
-
-// Filter.propTypes = {
-//   value: PropTypes.string.isRequired,
-//   onChange: PropTypes.func.isRequired,
-// };

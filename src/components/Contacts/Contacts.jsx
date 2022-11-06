@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteContact } from '../../redux/store';
-// import PropTypes from 'prop-types';
 import { TiDeleteOutline } from 'react-icons/ti';
 import {
   ContactsList,
@@ -26,9 +25,7 @@ const Contacts = () => {
 
   const filteredContacts = getFilteredContacts();
 
-  const onBtnClick = id => {
-    dispatch(deleteContact(id));
-  };
+  const onBtnClick = id => dispatch(deleteContact(id));
 
   return (
     <>
@@ -52,14 +49,3 @@ const Contacts = () => {
 };
 
 export default Contacts;
-
-// Contacts.propTypes = {
-//   contacts: PropTypes.arrayOf(
-//     PropTypes.exact({
-//       id: PropTypes.string.isRequired,
-//       name: PropTypes.string.isRequired,
-//       number: PropTypes.string.isRequired,
-//     })
-//   ),
-//   onDelete: PropTypes.func.isRequired,
-// };

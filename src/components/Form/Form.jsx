@@ -1,7 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { addContact } from '../../redux/store';
 import { useState } from 'react';
-// import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import { StyledForm, FormLabel, FormInput, SubmitButton } from './Form.styled';
 
@@ -73,7 +72,3 @@ export const Form = () => {
 };
 
 export default Form;
-
-// Form.propTypes = {
-//   onSubmit: PropTypes.func.isRequired,
-// };
