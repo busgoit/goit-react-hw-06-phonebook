@@ -12,19 +12,23 @@ import {
   REGISTER,
 } from 'redux-persist';
 
-const initialContacts = [
-  { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-  { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-];
+const initialContacts = {
+  items: [
+    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+  ],
+};
 
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: initialContacts,
   reducers: {
     addContact(state, action) {
+      console.log(state);
       return [...state, action.payload];
     },
     deleteContact(state, action) {
+      console.log(state);
       return [...state].filter(contact => contact.id !== action.payload);
     },
   },

@@ -11,12 +11,14 @@ import {
 } from './Contacts.styled';
 
 const Contacts = () => {
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(state => state.contacts.items);
   const filter = useSelector(state => state.filter);
   const dispatch = useDispatch();
 
   const getFilteredContacts = () => {
     const normalisedFilter = filter.toLowerCase().trim();
+
+    console.log(contacts);
 
     return [...contacts].filter(contact =>
       contact.name.toLowerCase().includes(normalisedFilter)
