@@ -18,8 +18,6 @@ const Contacts = () => {
   const getFilteredContacts = () => {
     const normalisedFilter = filter.toLowerCase().trim();
 
-    console.log(contacts);
-
     return [...contacts].filter(contact =>
       contact.name.toLowerCase().includes(normalisedFilter)
     );

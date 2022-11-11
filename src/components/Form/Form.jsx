@@ -20,7 +20,7 @@ export const Form = () => {
 
   const onFormSubmitHandle = e => {
     e.preventDefault();
-    dispatch(addContact({ id: nanoid(), name, number }));
+    dispatch(addContact({ name, number }));
     resetForm();
   };
 
